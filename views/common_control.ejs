@@ -1,0 +1,73 @@
+function postJson(request)
+{	
+	var action = request.action;
+	//delete request.action;
+
+	var response ={};
+
+	//showDialog();
+
+	
+
+	$.ajax({
+		url     : "/API/"+action,
+		data    : request,
+		type    : 'post',
+		async   : false,
+		dataType:"json",
+		success : function(data) {		
+
+			var result = data.result;
+
+			//dissmissDialog();
+
+			response = result;
+
+		},
+		error:function(request,status,error){
+
+			//dissmissDialog();
+
+			//toast('ERROR : ' + error);
+			} 
+		});
+
+	return response;
+}
+   
+function postJsonForm(request, action)
+{	
+	//ar action = request.action;
+	//delete request.action;
+
+	var response ={};
+
+	//showDialog();
+
+	
+
+	$.ajax({
+		url     : "/API/"+action,
+		data    : request,
+		type    : 'post',
+		async   : false,
+		dataType:"json",
+		success : function(data) {		
+
+			var result = data.result;
+
+			//dissmissDialog();
+
+			response = result;
+
+		},
+		error:function(request,status,error){
+
+			//dissmissDialog();
+
+			//toast('ERROR : ' + error);
+			} 
+		});
+
+	return response;
+}
