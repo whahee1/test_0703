@@ -302,13 +302,14 @@ console.log("글쓰기");
     COMMON.log(action);
     var requestData = {};
     var responseData ={};
-
+    COMMON.log("111111111");
     var upload = multer({ storage: storage , limits: limits }).single('thumbnail');
-
+    COMMON.log("222222222222");
     upload(req, res, function (err) {
-
+      COMMON.log("3333333333333");
+      COMMON.log("req.query "+req.query);
       var IsGet = Object.keys(req.query).length;    
-
+      COMMON.log("44444444444");
       if(IsGet>0)
         requestData = req.query;
       else
@@ -378,8 +379,22 @@ console.log("글쓰기");
 */
 var queryJson = {};
 
-console.log("requestData.item_board_id "+requestData.item_board_id);
+console.log("requestData.title "+requestData.title);
+console.log("requestData.content "+requestData.content);
 
+
+var q = `
+INSERT INTO board
+(
+ BOARD_TYPE,
+ TITLE,
+ CONTENT
+)VALUES(
+'101','`+requestData.title+`','`+requestData.content+`'
+
+);
+`
+/*
       for(var i=0; i<requestData.item_board_id.length; i++){        
 
         var q = `
@@ -388,6 +403,17 @@ console.log("requestData.item_board_id "+requestData.item_board_id);
               ,item_board_comments = '`+requestData.item_board_comments[i]+`'
          WHERE item_board_id = '`+requestData.item_board_id[i]+`'
          `
+
+         INSERT INTO board
+(
+ BOARD_TYPE,
+ TITLE,
+ CONTENT
+)VALUES(
+'101','타이틀','컨텐츠'
+
+);
+*/
 
         connection.query(q, queryJson, function(err, result, fields) {    
 
@@ -402,7 +428,7 @@ console.log("requestData.item_board_id "+requestData.item_board_id);
         //  responseData.result.isFile = true;
          
         }); 
-      }
+    //  }
       res.json(responseData);
       connection.end();
       return;     
